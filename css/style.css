@@ -1,0 +1,207 @@
+* {margin:0; padding:0; box-sizing:border-box;}
+
+body {
+    height: 300vh;
+    background: black;
+    overflow-x: hidden;
+    color: white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+canvas {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+}
+
+.spline-scene-overlay {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    background: radial-gradient(circle at center, rgba(0,255,255,0.15), transparent 70%);
+    opacity:0.3;
+}
+
+/* ===== 로그인 UI ===== */
+.login-wrapper{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:20;
+}
+
+.login-card{
+    display:flex;
+    width:820px;
+    height:440px;
+    border-radius:20px;
+    overflow:hidden;
+
+    background: rgba(255,255,255,0.035);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    position: relative;
+    
+    box-shadow:
+        0 0 15px rgba(0, 255, 255, 0.391),
+        0 0 50px rgba(0, 255, 255, 0.282),
+        0 0 80px rgba(0, 255, 255, 0.217),
+        inset 0 0 20px rgba(0, 255, 255, 0.153);
+
+    transition: transform 0.2s ease;
+}
+
+.login-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.15), transparent 40%);
+    opacity:0.6;
+    pointer-events:none;
+}
+
+.login-card::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:20px;
+    padding:0.6px;
+
+    background: linear-gradient(
+        120deg,
+        rgba(0,255,255,0.9),
+        rgba(0,255,255,0.4),
+        rgba(0,255,255,0.9)
+    );
+
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    pointer-events:none;
+
+    filter:
+        drop-shadow(0 0 6px cyan)
+        drop-shadow(0 0 12px cyan);
+}
+
+/* 왼쪽 */
+.login-left{ width:50%; }
+.login-left img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* 오른쪽 */
+.login-right{
+    width:50%;
+    padding:60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:15px;
+    background: rgba(255,255,255,0.015);
+}
+
+.logo{
+    color:rgba(0,255,255,0.7);
+    font-size:0.85rem;
+    
+    margin-top: 20px;
+    position: relative;
+    top: 10px;
+}
+
+.login-right h2{ color:white; }
+
+.login-right input{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.025);
+    color:white;
+    outline:none;
+}
+
+.login-right input::placeholder{
+    color:rgba(255,255,255,0.35);
+}
+
+.login-right input:focus{
+    border:1px solid cyan;
+    box-shadow:0 0 12px rgba(0,255,255,0.6);
+}
+
+.login-right button{
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg, rgb(17, 235, 235), #bb4521);
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-right button:hover{
+    box-shadow:
+        0 0 1px rgb(235, 255, 255),
+        0 0 16px rgba(133, 162, 162, 0.698);
+}
+
+.copyright{
+    font-size:0.7rem;
+    opacity:0.5;
+}
+
+.cursor{
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    background: rgba(0,255,255,0.03);
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(6px);
+
+    border: 1px solid rgba(0,255,255,0.6);
+
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.floating-logo{
+    position: absolute;
+
+    top: 100px;
+    right: 65px;
+
+    width: 55px;
+    height: 55px;
+
+    object-fit: contain;
+
+    opacity: 0.47;
+    filter: saturate(0.65);
+
+    pointer-events: none;
+
+    transition: transform 0.2s ease;
+}
